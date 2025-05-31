@@ -13,9 +13,12 @@ const Footer = () => {
 
     <div className="flex flex-col">
       <h1>Quick Links</h1>
-      <Link to="/home#about">About</Link>
+      <Link to="/home">About</Link>
+      <Link to="/home">Values</Link>
+      <Link to="/home">supporters</Link>
+      {/* <Link to="/home#about">About</Link>
       <Link to="/home#values">Values</Link>
-      <Link to="/home#supporters">supporters</Link>
+      <Link to="/home#supporters">supporters</Link> */}
     </div>
 
     <div>

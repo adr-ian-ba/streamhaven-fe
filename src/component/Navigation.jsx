@@ -97,9 +97,12 @@ const Navigation = ({showSearch = true}) => {
 
             <h5 className="mx-4 mt-[2rem] text-xl">Support</h5>
             <ul className="mt-[.5rem] text-sm">
-                <NavLink to="/home/#about" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>About</NavLink>
+                <NavLink to="/home" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>About</NavLink>
+                <NavLink to="/home" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>Values</NavLink>
+                <NavLink to="/home" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>Supporters</NavLink>
+                {/* <NavLink to="/home/#about" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>About</NavLink>
                 <NavLink to="/home/#values" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>Values</NavLink>
-                <NavLink to="/home/#supporters" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>Supporters</NavLink>
+                <NavLink to="/home/#supporters" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>Supporters</NavLink> */}
             </ul>
 
         </div>
