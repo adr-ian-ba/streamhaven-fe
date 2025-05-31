@@ -99,7 +99,7 @@ const AllPage = () => {
                 <img className="w-full h-full object-cover" src={`${spotLight.backdrop_path}`} alt="" />
 
                 <div className="absolute top-[28%] sm:top-[30%] mx-4 2xl:mx-[8rem] z-20">
-                  <h1 className="text-[2.5rem] sm:text-[3rem] font-bold text-white break-words whitespace-normal w-full max-w-screen-xl mx-auto leading-10">
+                  <h1 className="text-[2.5rem] sm:text-[3rem] font-bold text-white break-words whitespace-normal w-full max-w-screen-xl mx-auto leading-10 mb-[0.5rem]">
                     {spotLight.title}
                   </h1>                  <p className="text-[.8rem] sm:text-sm max-w-[35rem] color-white overflow-hidden text-ellipsis line-clamp-4 mb-[.5rem]">{spotLight.overview}</p>
 
