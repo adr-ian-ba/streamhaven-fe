@@ -132,7 +132,7 @@ const AllPage = () => {
               </div>
               )}
 
-            <div className="relative mx-4 2xl:mx-[8rem] pt-[70vh]">
+            <div className="relative mx-4 2xl:mx-[8rem] sm:pt-[60vh] pt-[67vh]">
 
               <div className="flex items-center gap-4 mb-[1rem]">  
 
