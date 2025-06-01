@@ -59,7 +59,7 @@ const submitData = async () => {
 
     toast.success(response.message, { duration: 3000 });
 
-    setTimeout(() => navigate("/all"), 2000);
+    setTimeout(() => navigate("/"), 2000);
   } catch (error) {
     console.error("Password reset error:", error);
     toast.error("Something went wrong. Please try again.", { duration: 3000 });
