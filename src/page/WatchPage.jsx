@@ -112,14 +112,14 @@ const WatchPage = () => {
 
 
   
-    // const embedUrlMovie = `https://vidsrc.cc/${version}/embed/movie/${id}`;
-    // const embedUrlSerie = `https://vidsrc.cc/${version}/embed/tv/${id}/${ss}/${ep}`;
+    const embedUrlMovie = `https://vidsrc.net/embed/movie?tmdb=${id}`;
+    const embedUrlSerie = `https://vidsrc.net/embed/tv?tmdb=${id}&season=${ss}&episode=${ep}`;
 
     // const embedUrlMovie = `https://vidbinge.dev/embed/movie/${id}`
     // const embedUrlSerie = `https://vidbinge.dev/embed/tv/${id}/${ss}/${ep}`
 
-    const embedUrlMovie = `https://vidsrc.cc/v2/embed/movie/${id}?autoPlay=false`
-    const embedUrlSerie = `https://vidsrc.cc/v2/embed/tv/${id}/${ss}/${ep}?autoPlay=false`
+    //const embedUrlMovie = `https://vidsrc.cc/v2/embed/movie/${id}?autoPlay=false`
+    //const embedUrlSerie = `https://vidsrc.cc/v2/embed/tv/${id}/${ss}/${ep}?autoPlay=false`
     
     if(!movieInfo){
         return (
