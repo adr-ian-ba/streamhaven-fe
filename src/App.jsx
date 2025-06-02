@@ -55,6 +55,54 @@ function App() {
         setIsLoggedIn(true);
         setUsername(res.username);
         setProfile(res.profile);
+
+        if (!res.isVerified) {
+  const lastShown = localStorage.getItem("verify-warning-last-shown");
+  const today = new Date().toDateString();
+
+  if (lastShown !== today && res.expiresIn !== null) {
+    const expiresAt = Date.now() + res.expiresIn;
+
+    const ToastContent = ({ t }) => {
+      const [remaining, setRemaining] = useState(res.expiresIn);
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setRemaining(Math.max(0, expiresAt - Date.now()));
+        }, 1000);
+        return () => clearInterval(interval);
+      }, []);
+      const days = Math.floor(remaining / (24 * 60 * 60 * 1000));   
+      const hours = Math.floor(remaining / 3600000);
+      const minutes = Math.floor((remaining % 3600000) / 60000);
+      const seconds = Math.floor((remaining % 60000) / 1000);
+
+return (
+  <div className="bg-gray-900 text-white p-4 rounded-md shadow-lg max-w-xs w-full">
+    <strong className="block text-yellow-400 mb-1">⚠️ Unverified Account</strong>
+    <p className="text-sm">Please verify your email to avoid account deletion.</p>
+    <p className="mt-2 text-sm">
+      Time left:{" "}
+      <span className="font-semibold text-red-400">
+        {days}d {hours}h {minutes}m {seconds}s
+      </span>
+    </p>
+    <button
+      className="mt-4 px-3 py-1 rounded bg-red-500 hover:bg-red-600 text-white text-sm"
+      onClick={() => toast.dismiss(t.id)}
+    >
+      Got it
+    </button>
+  </div>
+);
+
+    };
+
+    toast.custom((t) => <ToastContent t={t} />, { duration: Infinity });
+    localStorage.setItem("verify-warning-last-shown", today);
+  }
+}
+
       })
       .catch((err) => {
         if (err.message.includes("401")) {

@@ -16,7 +16,7 @@ const RegisterGroup = () => {
 
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
-    const [includeGuestData, setIncludeGuestData] = useState(false);
+    const [includeGuestData, setIncludeGuestData] = useState(true);
     const [usernameAvailable, setUsernameAvailable] = useState(null);
       const debounceTimer = useRef(null);
 
@@ -116,9 +116,20 @@ const submitData = async () => {
           throw new Error("Registration failed");
         }
 
+        // ✅ Store token
+        if (response.token) {
+          localStorage.setItem("streamhaven-token", response.token);
+        }
+
+        // ✅ Clean up guest data
         if (includeGuestData) {
           localStorage.removeItem("local-save");
         }
+
+        // ✅ Reload after delay
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
 
         return response.message;
       },
@@ -126,6 +137,7 @@ const submitData = async () => {
     }
   );
 };
+
 
 
 
