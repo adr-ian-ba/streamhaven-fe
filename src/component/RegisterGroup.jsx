@@ -18,31 +18,40 @@ const RegisterGroup = () => {
     const [errorMessage, setErrorMessage] = useState("")
     const [includeGuestData, setIncludeGuestData] = useState(true);
     const [usernameAvailable, setUsernameAvailable] = useState(null);
+    const [loading, setLoading] = useState(false);
+
       const debounceTimer = useRef(null);
 
 
- useEffect(() => {
-    if (!username) {
-      setUsernameAvailable(null);
-      return;
-    }
+useEffect(() => {
+  if (!username) {
+    setUsernameAvailable(null);
+    setLoading(false);
+    return;
+  }
 
-    // clear previous debounce
+  if (debounceTimer.current) clearTimeout(debounceTimer.current);
+
+  setLoading(true);
+
+  debounceTimer.current = setTimeout(() => {
+    apiHelper
+      .get(`/user/check-username/${username}`)
+      .then(res => {
+        setUsernameAvailable(res.condition);
+        setLoading(false);
+      })
+      .catch(() => {
+        setUsernameAvailable(false);
+        setLoading(false);
+      });
+  }, 600);
+
+  return () => {
     if (debounceTimer.current) clearTimeout(debounceTimer.current);
+  };
+}, [username]);
 
-    debounceTimer.current = setTimeout(() => {
-      apiHelper.get(`/user/check-username/${username}`)
-        .then(res => {
-          setUsernameAvailable(res.condition);
-        })
-        .catch(() => setUsernameAvailable(false));
-    }, 600); // 600ms debounce
-
-    // cleanup if username changes before timeout finishes
-    return () => {
-      if (debounceTimer.current) clearTimeout(debounceTimer.current);
-    };
-  }, [username]);
 
 
 
@@ -153,22 +162,25 @@ const submitData = async () => {
                 <span className="text-red-500 text-[.8rem]">{errorMessage}</span>
             </div>
         )}
-        <div className="mb-[1.5rem]">
+        <div className="">
             <p className="text-sm">Your Username</p>
             <input value={username} onChange={(e) => setUsername(e.target.value)} className="text-sm focus:outline-none focus:ring-0 w-full h-[2rem] p-2 text-black rounded-[3px]" placeholder="Name" type="text" />
         </div>
-            {username.trim().length > 0 && (
-            <p className="text-sm mt-1">
-                {usernameAvailable === true ? (
+          {username.trim().length > 0 && (
+            <p className="text-sm mt-1 h-5">
+              {loading ? (
+                <span className="text-yellow-400">⏳ Checking username...</span>
+              ) : usernameAvailable === true ? (
                 <span className="text-green-500">Username available ✅</span>
-                ) : usernameAvailable === false ? (
+              ) : usernameAvailable === false ? (
                 <span className="text-red-500">Username already taken ❌</span>
-                ) : null}
+              ) : null}
             </p>
-            )}
+          )}
 
 
-        <div className="mb-[1.5rem]">
+
+        <div className="mb-[1.5rem] mt-[1.5rem]">
             <p className="text-sm my-[.5rem]">Email Address</p>
             <input value={email} onChange={(e) => setEmail(e.target.value)} className="text-sm focus:outline-none focus:ring-0 w-full h-[2rem] p-2 text-black rounded-[3px]" placeholder="email@gmail.com" type="text" />
         </div>

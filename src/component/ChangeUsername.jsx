@@ -5,26 +5,38 @@ import toast from "react-hot-toast";
 const ChangeUsername = ({ onUpdate }) => {
   const [username, setUsername] = useState("");
   const [available, setAvailable] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const debounceTimer = useRef(null);
 
-  useEffect(() => {
-    if (!username) {
-      setAvailable(null);
-      return;
-    }
+useEffect(() => {
+  if (!username) {
+    setAvailable(null);
+    setLoading(false);
+    return;
+  }
 
+  if (debounceTimer.current) clearTimeout(debounceTimer.current);
+
+  setLoading(true);
+
+  debounceTimer.current = setTimeout(() => {
+    apiHelper.get(`/user/check-username/${username}`)
+      .then(res => {
+        setAvailable(res.condition);
+        setLoading(false);
+      })
+      .catch(() => {
+        setAvailable(false);
+        setLoading(false);
+      });
+  }, 600);
+
+  return () => {
     if (debounceTimer.current) clearTimeout(debounceTimer.current);
+  };
+}, [username]);
 
-    debounceTimer.current = setTimeout(() => {
-      apiHelper.get(`/user/check-username/${username}`)
-        .then(res => setAvailable(res.condition))
-        .catch(() => setAvailable(false));
-    }, 600);
-
-    return () => {
-      if (debounceTimer.current) clearTimeout(debounceTimer.current);
-    };
-  }, [username]);
 
   const handleSubmit = async () => {
     const token = localStorage.getItem("streamhaven-token");
@@ -52,10 +64,12 @@ const ChangeUsername = ({ onUpdate }) => {
         placeholder="Enter new username"
         className="w-full p-2 rounded bg-gray-100 text-black focus:outline-none focus:ring focus:ring-primary-color-and-hover"
       />
-      <div className="mt-1 text-sm">
-        {available === true && <span className="text-green-500">✅ Username available</span>}
-        {available === false && <span className="text-red-500">❌ Username taken</span>}
+      <div className="mt-1 text-sm h-5">
+        {loading && <span className="text-yellow-500">⏳ Checking availability...</span>}
+        {!loading && available === true && <span className="text-green-500">✅ Username available</span>}
+        {!loading && available === false && <span className="text-red-500">❌ Username taken</span>}
       </div>
+
       <button
         disabled={!available}
         onClick={handleSubmit}
