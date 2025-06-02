@@ -163,7 +163,7 @@ const WatchPage = () => {
                     frameBorder="0"
                     allow="autoplay; encrypted-media"
                     allowFullScreen
-                    onLoad={() => setIsIframeLoading(false)} // ✅ hide loading when done
+                    onLoad={() => setIsIframeLoading(false)}
                 ></iframe>
             </div>
 
