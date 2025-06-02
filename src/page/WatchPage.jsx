@@ -14,6 +14,8 @@ const WatchPage = () => {
     const {isLoggedIn} = useContext(UserContext)
     const {id, type ,ss, ep} = useParams()
     const [movieInfo, setMovieInfo] = useState(null)
+    const [isIframeLoading, setIsIframeLoading] = useState(true);
+
     const navigate = useNavigate()
 
 
@@ -145,16 +147,23 @@ const WatchPage = () => {
                 <h1>BACK</h1>
             </div>
 
-            <div className="video-container mt-4 mx-auto mb-8">
+            <div className="video-container mt-4 mx-auto mb-8 relative">
+                {isIframeLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black z-10">
+                        <div className="text-white animate-pulse text-xl font-bold">🎥 Loading player...</div>
+                    </div>
+                )}
+
                 <iframe
-                    className='w-full h-full'
-                    src={type == "MV" ? embedUrlMovie : embedUrlSerie}
+                    className='w-full h-full relative z-0'
+                    src={type === "MV" ? embedUrlMovie : embedUrlSerie}
                     title={movieInfo.title}
                     width="100%"
                     height="500"
                     frameBorder="0"
                     allow="autoplay; encrypted-media"
                     allowFullScreen
+                    onLoad={() => setIsIframeLoading(false)} // ✅ hide loading when done
                 ></iframe>
             </div>
 
