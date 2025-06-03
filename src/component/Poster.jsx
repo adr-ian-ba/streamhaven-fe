@@ -108,6 +108,22 @@ const handleDelete = () => {
             <h5 className="text-[.7rem]">{Math.floor(movie.vote_average)}</h5>
           </div>
 
+          {!["local", "cloud"].includes(renderType) && (
+            <div
+              onClick={toggleOpen}
+              className="group z-10 rounded-[3px] bg-black/50 h-fit p-1 cursor-pointer hover:scale-115 transition-all duration-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                className="size-4 fill-gray-300 group-hover:fill-white transition-colors duration-300"
+              >
+                <path d="M3.75 2a.75.75 0 0 0-.75.75v10.5a.75.75 0 0 0 1.28.53L8 10.06l3.72 3.72a.75.75 0 0 0 1.28-.53V2.75a.75.75 0 0 0-.75-.75h-8.5Z" />
+              </svg>
+            </div>
+          )}
+
+
 
           {["local", "cloud"].includes(renderType) && folderName && (
               <div onClick={handleDelete} className="z-10">
