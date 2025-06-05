@@ -126,11 +126,33 @@ const LoginGroup = () => {
 
       {/* Submit Button */}
       <button
+      onClick={submitData}
         type="submit"
         className="rounded-[5px] w-full bg-primary-color-and-hover cursor-pointer h-[2.5rem] mb-1 text-white"
       >
         Submit
       </button>
+      
+        <div className="flex items-center my-2">
+  <div className="flex-grow border-t border-gray-300 dark:border-gray-700" />
+  <span className="px-4 text-gray-500 dark:text-gray-400 text-sm">or</span>
+  <div className="flex-grow border-t border-gray-300 dark:border-gray-700" />
+</div>
+
+<button
+  onClick={() => window.location.href = 'http://localhost:3000/auth/google'}
+  className="px-4 hover:bg-gray-300 cursor-pointer mb-2 py-2 flex gap-2 items-center justify-center bg-white text-black rounded-md w-full"
+>
+  <img
+    className="w-6 h-6"
+    src="https://www.svgrepo.com/show/475656/google-color.svg"
+    loading="lazy"
+    alt="google logo"
+  />
+  <span>Login with Google</span>
+</button>
+
+
     </form>
   );
 };

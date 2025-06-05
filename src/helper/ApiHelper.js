@@ -120,7 +120,7 @@ class ApiHelper {
     
 }
 
-// const apiHelper = new ApiHelper("http://localhost:3000")
-const apiHelper = new ApiHelper("https://streamhaven-be.onrender.com")
+const apiHelper = new ApiHelper("http://localhost:3000")
+// const apiHelper = new ApiHelper("https://streamhaven-be.onrender.com")
 
 export default apiHelper

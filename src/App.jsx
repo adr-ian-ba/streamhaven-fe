@@ -46,6 +46,16 @@ function App() {
     const [retryCount, setRetryCount] = useState(0);
 
     useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tokenFromUrl = urlParams.get("token");
+
+        if (tokenFromUrl) {
+        localStorage.setItem("streamhaven-token", tokenFromUrl);
+        // Optionally clean URL
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+        }
+
         const token = localStorage.getItem("streamhaven-token");
         if (!token) return;
 
@@ -56,6 +66,7 @@ function App() {
                 setIsLoggedIn(true);
                 setUsername(res.username);
                 setProfile(res.profile);
+                console.log(res)
 
                 if (!res.isVerified) {
                     const lastShown = localStorage.getItem("verify-warning-last-shown");
