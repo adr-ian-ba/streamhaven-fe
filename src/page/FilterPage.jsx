@@ -146,6 +146,26 @@ const FilterPage = () => {
             .finally(() => setLoading(false)); // Stop loading
     };
 
+    const clearFilters = () => {
+    setType("MV");
+    setSelectedGenres([]);
+    setLanguage("");
+    setReleaseYear("");
+    setVoteGte("");
+    setVoteLte("");
+    setRuntimeGte("");
+    setRuntimeLte("");
+    setIncludeAdult(false);
+    setSortBy("popularity.desc");
+    setKeywordInput("");
+    setKeywordOptions([]);
+    setSelectedKeywords([]);
+    setResults([]);
+    setPage(1);
+    setTotalPages(1);
+};
+
+
     return (
         <div className="background-color">
             <Navigation showSearch={false} />
@@ -363,6 +383,14 @@ const FilterPage = () => {
                 >
                     Apply Filters
                 </button>
+
+                <button
+                        onClick={clearFilters}
+                        className="mb-2 cursor-pointer mt-2 text-sm text-red-400 underline hover:text-red-300 mx-auto block"
+                        >
+                        Clear All Filters
+                        </button>
+
 
                 {loading ? (
                     <h1 className="text-center py-10 text-gray-300 text-xl">🎥 Loading results...</h1>
