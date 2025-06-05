@@ -91,7 +91,7 @@ const handleEnter = () => {
         <svg className="h-[1.5rem] w-[1.5rem]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#242428" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
         </svg>
-        {/* <NavLink to="/filter" className="foreground-color py-1 px-2 text-[.8rem] text-white rounded-[3px]">Filter</NavLink> */}
+        <NavLink to="/filter" className="foreground-color py-1 px-2 text-[.8rem] text-white rounded-[3px]">Filter</NavLink>
       </div>
 
       {input.length > 0 && isFocused && ( 

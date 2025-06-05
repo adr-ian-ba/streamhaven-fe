@@ -92,7 +92,7 @@ const Navigation = ({showSearch = true}) => {
                 <NavLink to="/movie" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>Movie</NavLink>
                 <NavLink to="/serie" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>Series</NavLink>
                 {/* <NavLink to="/anime" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>Anime</NavLink> */}
-                {/* <NavLink to="/filter" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>Filter</NavLink> */}
+                <NavLink to="/filter" className={({ isActive }) => `${isActive ? "bg-primary-color border-b-blue-600" : "border-b-gray-400"} px-8 border-b mb-[1rem] block p-2 hover:bg-primary-color hover:border-b-blue-600`}>Filter</NavLink>
             </ul>
 
             <h5 className="mx-4 mt-[2rem] text-xl">Support</h5>
@@ -130,14 +130,13 @@ const Navigation = ({showSearch = true}) => {
             <ul className={`flex gap-4 ${!showSearch ? '' : ''}`}>                <NavLink to="/" className={({isActive}) => `${isActive ? "color-primary font-bold" : ""} p-2`}>All</NavLink>
                 <NavLink to="/movie" className={({isActive}) => `${isActive ? "color-primary font-bold" : ""} p-2`}>Movie</NavLink>
                 <NavLink to="/serie" className={({isActive}) => `${isActive ? "color-primary font-bold" : ""} p-2`}>Series</NavLink>
-                {/* <NavLink to="/anime" className={({isActive}) => `${isActive ? "color-primary font-bold" : ""} p-2`}>Anime</NavLink> */}
+                {/* <NavLink to="/filter" className={({isActive}) => `${isActive ? "color-primary font-bold" : ""} p-2`}>Filter</NavLink> */}
             </ul>
 
 
             {isLoggedIn ? (
                 <>
                         <AvatarLink profile={profile} />
-                        {/* <img src={profile} alt="test" /> */}
                 </>
 
             ):(
