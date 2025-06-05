@@ -150,7 +150,7 @@ const FilterPage = () => {
         <div className="background-color">
             <Navigation showSearch={false} />
 
-            <div className="min-h-screen text-white p-6 pt-[8rem] mx-4 2xl:mx-[8rem]">
+            <div className="min-h-screen text-white p-6 pt-[8rem] mx-2 2xl:mx-[8rem]">
                 <h1 className="text-3xl font-bold mb-6 text-center">Filter Movies & Series</h1>
 
                 <div>
