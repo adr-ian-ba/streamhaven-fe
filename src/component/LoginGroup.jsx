@@ -140,7 +140,7 @@ const LoginGroup = () => {
 </div>
 
 <button
-  onClick={() => window.location.href = 'http://localhost:3000/auth/google'}
+  onClick={() => window.location.href = 'https://streamhaven-be.onrender.com/auth/google'}
   className="px-4 hover:bg-gray-300 cursor-pointer mb-2 py-2 flex gap-2 items-center justify-center bg-white text-black rounded-md w-full"
 >
   <img
