@@ -278,15 +278,16 @@ const submitData = async () => {
   {/* Submit Button */}
   <button
     type="submit"
+    onClick={submitData}
     className="rounded-[5px] w-full bg-primary-color-and-hover cursor-pointer h-[2.5rem] mb-2 text-white"
   >
     Submit
   </button>
 
   <div className="flex items-center my-2">
-  <div className="flex-grow border-t border-gray-300 dark:border-gray-700" />
-  <span className="px-4 text-gray-500 dark:text-gray-400 text-sm">or</span>
-  <div className="flex-grow border-t border-gray-300 dark:border-gray-700" />
+  <div className="flex-grow border-t border-gray-300 " />
+  <span className="px-4 text-gray-300 text-sm">or</span>
+  <div className="flex-grow border-t border-gray-300 " />
 </div>
 
 <button

@@ -7,7 +7,7 @@ const MovieGrid = ({ children, className = '', movies, renderType = "normal", fo
   return (
     <div className={`${className}`}>
       {children}
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-4">
         {
           movies.map((eachMovie, index) => (
               <Poster renderType={renderType} folderName={folderName} folderId={folderId} movie={eachMovie} key={index} onCloudUpdate={onCloudUpdate}/>

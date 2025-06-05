@@ -104,15 +104,12 @@ function App() {
                                             {days}d {hours}h {minutes}m {seconds}s
                                         </span>
                                     </p>
-                                    <button
+                                        <button
                                         className="mt-4 px-3 py-1 rounded bg-red-500 hover:bg-red-600 text-white text-sm"
-                                        onClick={() => {
-                                            requestAnimationFrame(() => toast.dismiss(t.id));
-                                        }}
-                                    >
+                                        onClick={() => toast.dismiss(t.id)}
+                                        >
                                         Got it
-                                    </button>
-
+                                        </button>
                                 </div>
                             );
                         };
