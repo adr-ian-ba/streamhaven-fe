@@ -279,7 +279,7 @@ const submitData = async () => {
   <button
     type="submit"
     onClick={submitData}
-    className="rounded-[5px] w-full bg-primary-color-and-hover cursor-pointer h-[2.5rem] mb-2 text-white"
+    className="rounded-[5px] w-full bg-primary-color-and-hover cursor-pointer h-[2.5rem] text-white"
   >
     Submit
   </button>

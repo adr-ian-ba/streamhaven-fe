@@ -25,6 +25,8 @@ import SavePage from "./page/SavePage";
 import HistoryPage from "./page/HistoryPage";
 import NotFound from "./page/NotFound";
 import FilterPage from "./page/FilterPage";
+import TermPage from "./page/TermPage";
+import PrivacyPage from "./page/PrivacyPage";
 
 function App() {
     const {
@@ -214,15 +216,16 @@ function App() {
                     {dialogMode === "register" && (
                         <div>
                             <RegisterGroup />
-                            <p className="max-w-[20rem] text-center mx-auto">
-                                Activate Your Account{" "}
-                                <span
-                                    onClick={() => setDialogMode("verify")}
-                                    className="color-primary font-bold cursor-pointer"
-                                >
-                                    Verify
-                                </span>
-                            </p>
+                            <p className="text-sm text-gray-400 mt-4 text-center max-w-[350px] mx-auto">
+                                By signing up, you agree to our{" "}
+                                <a href="/privacy" target="_blank" className="color-primary underline font-bold">
+                                    Privacy Policy
+                                </a>{" "}
+                                and{" "}
+                                <a href="/term" target="_blank" className="color-primary underline font-bold">
+                                    Terms of Service
+                                </a>.
+                                </p>                        
                         </div>
                     )}
                     {dialogMode === "verify" && (
@@ -266,6 +269,8 @@ function App() {
             <Routes>
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/home" element={<HomePage />} />
+                <Route path="/term" element={<TermPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="/" element={<AllPage />} />
                 <Route path="/user/:type" element={<ProfilePage />} />
                 <Route path="/save" element={<SavePage />} />

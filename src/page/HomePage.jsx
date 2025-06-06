@@ -4,8 +4,11 @@ import Footer from "../component/Footer";
 import SearchBar from "../component/SearchBar";
 import { useLocation } from "react-router-dom";
 import Navigation from "../component/Navigation";
+import LogoThreeD from "../component/LogoThreeD";
+import useIsMobile from "../helper/isMobile";
 
 const supporterGroups = {
+    
     Platinum: [
         {
             name: "racuningirls",
@@ -25,6 +28,7 @@ const supporterGroups = {
     ],
 };
 
+
 const tierColors = {
     Platinum : "border-purple-400 text-purple-400",
     Gold: "border-yellow-400 text-yellow-300",
@@ -33,6 +37,8 @@ const tierColors = {
 };
 
 const HomePage = () => {
+    const isMobile = useIsMobile(); 
+
     const shareUrl = window.location.origin;
 
     const handleShare = () => {
@@ -56,8 +62,16 @@ const HomePage = () => {
             <Navigation showSearch={false}/>
             <div className="text-white min-h-screen pt-[5rem] px-6">
                 <div className="max-w-6xl mx-auto">
-                    <div id="about" className="text-center mb-16 pt-[4rem]">
-                    <img className="max-w-[20rem] w-fit mx-auto mb-[1rem]" src="/image/SH Long White.png" alt="" />
+                    <div id="about" className="text-center mb-16">
+                    {isMobile ? (
+                        <img
+                        className="max-w-[20rem] w-fit mx-auto mb-[1rem]"
+                        src="/image/SH Long White.png"
+                        alt="Logo"
+                        />
+                    ) : (
+                        <LogoThreeD />
+                    )}
                     <p className="text-lg text-gray-300">
                         Explore. Save. Watch. Your personalized movie & TV space — where freedom meets fandom.
                     </p>
