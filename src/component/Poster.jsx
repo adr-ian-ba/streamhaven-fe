@@ -256,18 +256,19 @@ const handleDelete = () => {
 
             </div>
             
-            {movie.media_type === "SR" && movie.seasons?.length > 0 ? null : (
-              <button onClick={() => handleClick(movie.id, movie.media_type)} className="border rounded-[3px] p-1 cursor-pointer transition-all duration-200 hover:bg-white hover:text-black">
-                Watch
-              </button>
-            )}
 
 
-            <div onClick={toggleOpen} className="border border-primary bg-primary-color-and-hover rounded-[3px] p-1 cursor-pointer flex justify-center">
+            <div onClick={toggleOpen} className="border rounded-[3px] p-1 cursor-pointer transition-all duration-200 hover:bg-white hover:text-black flex justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
               </svg>
             </div>
+
+            {movie.media_type === "SR" && movie.seasons?.length > 0 ? null : (
+              <button onClick={() => handleClick(movie.id, movie.media_type)} className=" border border-primary bg-primary-color-and-hover rounded-[3px] p-1 cursor-pointer flex justify-center">
+                Watch
+              </button>
+            )}
 
         </div>
       </div>
