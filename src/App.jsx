@@ -94,7 +94,7 @@ function App() {
 
                             return (
                                 <div className="bg-gray-900 text-white p-4 rounded-md shadow-lg max-w-xs w-full">
-                                    <strong className="block text-yellow-400 mb-1">
+                                    <strong className="block text-yellow-500 mb-1">
                                         ⚠️ Unverified Account
                                     </strong>
                                     <p className="text-sm">

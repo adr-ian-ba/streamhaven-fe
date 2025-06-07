@@ -4,6 +4,7 @@ import { UserContext } from "../helper/UserContext"
 import SearchBar from "./SearchBar"
 import AvatarLink from "./AvatarLink"
 
+// eslint-disable-next-line react/prop-types
 const Navigation = ({showSearch = true}) => {
     const [isOpen, setIsOpen] = useState(false)
     const {username, isLoggedIn, setUsername, setIsLoggedIn, profile} = useContext(UserContext)

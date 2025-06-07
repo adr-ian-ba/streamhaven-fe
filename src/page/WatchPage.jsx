@@ -108,6 +108,27 @@ const WatchPage = () => {
         }
     }, [movieInfo]);
 
+    useEffect(() => {
+    toast(
+        (t) => (
+            <div className="text-sm text-white">
+                <strong className="text-yellow-500">Notice :</strong> Media Player is a third-party service.
+                <br />
+                <p className="border-t-1 border-gray-400 pt-2 mt-2">StreamHaven is not affiliated with any ads shown.</p> 
+                <span className="font-semibold text-red-400">We recommend using an ad blocker.</span>
+            </div>
+        ),
+        {
+            duration: 4000,
+            style: {
+                background: "#1a1a1a",
+                padding: "12px",
+            }
+        }
+    );
+}, []);
+
+
     const embedUrlMovie = `https://vidsrc.net/embed/movie?tmdb=${id}`;
     const embedUrlSerie = `https://vidsrc.net/embed/tv?tmdb=${id}&season=${ss}&episode=${ep}`;
 
