@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import Dialog from "./Dialog";
 import SaveOption from "./SaveOption";
 import { UserContext } from "../helper/UserContext";
-import { deleteMovieFromLocal } from "../helper/SaveHelper";
+import { deleteMovieFromLocal, saveMovieToLocal } from "../helper/SaveHelper";
 import toast from "react-hot-toast";
 import apiHelper from "../helper/ApiHelper";
+
+const pendingDeletions = new Map();
 
 const Poster = ({ movie, renderType = "normal", folderName, folderId, onCloudUpdate }) => {
   const containerRef = useRef(null)
@@ -19,6 +21,48 @@ const Poster = ({ movie, renderType = "normal", folderName, folderId, onCloudUpd
   const toggleOpen = () =>{
     setDialogOpen(prevState => !prevState)
   }
+  const showUndoToast = (key, mode) => {
+  toast((t) => (
+    <div className="text-sm text-white">
+      <p>
+        {mode === "local"
+          ? `Movie removed from ${folderName}.`
+          : `Movie removed from cloud folder ${folderName}.`}
+      </p>
+      <button
+        className="mt-2 underline color-primary font-bold cuursor-pointer"
+        onClick={() => {
+          clearTimeout(pendingDeletions.get(key));
+          pendingDeletions.delete(key);
+
+          if (mode === "local") {
+            saveMovieToLocal(folderName, movie)
+          } else if (mode === "cloud") {
+            if (onCloudUpdate) {
+              onCloudUpdate((prev) => {
+                const updated = { ...prev };
+                updated[folderName] = [...(updated[folderName] || []), movie];
+                return updated;
+              });
+            }
+          }
+
+          toast.dismiss(t.id);
+        }}
+      >
+        Undo
+      </button>
+    </div>
+  ), {
+    duration: 8000,
+    position : "bottom-right",
+    style: {
+      background: "#1a1a1a",
+      padding: "12px",
+    },
+  });
+};
+
   useEffect(() => {
     const checkPosition = () => {
       if (containerRef.current) {
@@ -62,7 +106,6 @@ const handleDeleteCloud = async () => {
 
       toast.success("Movie removed from cloud");
 
-      // 👇 Notify parent to refresh full folder list
       if (onCloudUpdate) onCloudUpdate();
 
     } catch (err) {
@@ -71,12 +114,48 @@ const handleDeleteCloud = async () => {
   };
 
 const handleDelete = () => {
+  const key = `${folderName}-${movie.id}`;
+
+  // --- Delete from LOCAL ---
   if (renderType === "local") {
-    handleDeleteLocal(folderName, movie.id);
+    handleDeleteLocal(folderName, movie.id); // Remove immediately
+
+    const timeoutId = setTimeout(() => {
+      pendingDeletions.delete(key);
+      // No further action needed; already deleted
+    }, 8000);
+
+    pendingDeletions.set(key, timeoutId);
+
+    showUndoToast(key, "local");
+
+  // --- Delete from CLOUD ---
   } else if (renderType === "cloud") {
-    handleDeleteCloud(folderName, movie.id);
+    // Remove from UI immediately (optimistically)
+    if (onCloudUpdate) onCloudUpdate((prev) => {
+      const updated = { ...prev };
+      updated[folderName] = updated[folderName].filter(m => m.id !== movie.id);
+      return updated;
+    });
+
+    const timeoutId = setTimeout(async () => {
+      try {
+        const token = localStorage.getItem("streamhaven-token");
+        const payload = { folderId, movieId: movie.id };
+        const res = await apiHelper.postAuthorization("/user/unsavemovie", payload, token);
+        if (!res.condition) toast.error("Failed to delete from cloud");
+      } catch {
+        toast.error("Cloud deletion failed");
+      }
+      pendingDeletions.delete(key);
+    }, 8000);
+
+    pendingDeletions.set(key, timeoutId);
+
+    showUndoToast(key, "cloud");
   }
 };
+
 
 
 

@@ -151,8 +151,23 @@ useEffect(() => {
                       folderId={eachFolder._id}
                       folderName={eachFolder.folder_name}
                       movies={eachFolder.saved}
-                      onCloudUpdate={fetchCloudFolders}
+                      onCloudUpdate={(updater) => {
+                        if (typeof updater === 'function') {
+                          setCloudFolders(prev => {
+                            const foldersByName = {};
+                            prev.forEach(f => foldersByName[f.folder_name] = f.saved);
+                            const updated = updater(foldersByName);
+                            return prev.map(f => ({
+                              ...f,
+                              saved: updated[f.folder_name] || []
+                            }));
+                          });
+                        } else {
+                          fetchCloudFolders(); // fallback
+                        }
+                      }}
                     />
+
                   ) : (
                     <p className="text-gray-400 italic">This folder is empty.</p>
                   )}
