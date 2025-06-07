@@ -65,7 +65,7 @@ const MovieCategoryPage = () => {
     const pageNumber = parseInt(page) || 1
     setCurrentPage(pageNumber);
 
-    apiHelper.get(`/getmovies/MV/${category}/${pageNumber}`).then((response) => {
+    apiHelper.get(`/media/getmovies/MV/${category}/${pageNumber}`).then((response) => {
       console.log(response);
       if (!response.condition) {
         toast.error(response.message);

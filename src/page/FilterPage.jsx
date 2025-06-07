@@ -423,7 +423,7 @@ const FilterPage = () => {
                             className={`w-10 h-10 rounded-[3px] ${
                                 p === page
                                     ? "bg-primary-color text-white"
-                                    : "text-white border border-gray-500"
+                                    : "text-white"
                             }`}
                             disabled={p === "..."}
                         >
