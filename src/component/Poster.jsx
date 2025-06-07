@@ -23,20 +23,20 @@ const Poster = ({ movie, renderType = "normal", folderName, folderId, onCloudUpd
   }
   const showUndoToast = (key, mode) => {
   toast((t) => (
-    <div className="text-sm text-white">
+    <div className="relative text-sm text-white w-[250px]">
       <p>
         {mode === "local"
           ? `Movie removed from ${folderName}.`
           : `Movie removed from cloud folder ${folderName}.`}
       </p>
       <button
-        className="mt-2 underline color-primary font-bold cuursor-pointer"
+        className="p-2 pl-0 underline color-primary font-bold cursor-pointer"
         onClick={() => {
           clearTimeout(pendingDeletions.get(key));
           pendingDeletions.delete(key);
 
           if (mode === "local") {
-            saveMovieToLocal(folderName, movie)
+            saveMovieToLocal(folderName, movie);
           } else if (mode === "cloud") {
             if (onCloudUpdate) {
               onCloudUpdate((prev) => {
@@ -52,16 +52,20 @@ const Poster = ({ movie, renderType = "normal", folderName, folderId, onCloudUpd
       >
         Undo
       </button>
+
+      {/* Progress bar */}
+      <div className="absolute bottom-[-5px] left-0 h-1 w-full bg-primary-color toast-progress-bar" ></div>
     </div>
   ), {
     duration: 8000,
-    position : "bottom-right",
+    position: "bottom-right",
     style: {
       background: "#1a1a1a",
       padding: "12px",
     },
   });
 };
+
 
   useEffect(() => {
     const checkPosition = () => {
