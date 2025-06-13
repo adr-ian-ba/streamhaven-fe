@@ -291,7 +291,7 @@ const submitData = async () => {
 </div>
 
 <button
-  onClick={() => window.location.href = 'https://streamhaven-be.onrender.com/auth/google'}
+  onClick={() => window.location.href = 'https://streamhaven-be.nusagitra.web.id/auth/google'}
   className=" cursor-pointer hover:bg-gray-300 px-4 mb-2 py-2 flex gap-2 items-center justify-center bg-white text-black rounded-md w-full"
 >
   <div className="w-6">
